@@ -1,6 +1,6 @@
 {
   "name": "@shippr/client",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/client/index.d.ts",
@@ -21,7 +21,6 @@
   "engines": {
     "node": "^18"
   },
-  "peerDependencies": {},
   "scripts": {
     "prepack": "yarn build",
     "build": "rollup -c --bundleConfigAsCjs",
@@ -33,5 +32,6 @@
     "uuid": "^9.0.0",
     "ws": "^8.13.0"
   },
-  "readme": "ERROR: No README data found!"
+  "readme": "ERROR: No README data found!",
+  "packageManager": "yarn@3.6.1"
 }
