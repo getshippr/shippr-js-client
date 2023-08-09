@@ -2,18 +2,42 @@
 
 Welcome! Shippr provides toolkits to build realtime features in no time.
 
-## Getting Started
+## Features
 
-To get started
+- Minimal HTTP client to interact with Shippr's API
+- Works both on the browser and node.js
+- Built with TypeScript
 
-1. `yarn add @shippr/react`
+## Quick start
 
-## Check out our components in our storybook
+Using Yarn
 
-hosted on Chromatic: [storybook](https://main--64c9065f0cdd34cacb3c195a.chromatic.com)
+```sh
+yarn add @shippr/client
+```
 
-## Contribution
+Using NPM
 
-1. New components can be added to `react/components/`
+```sh
+npm install @shippr/client
+```
 
-Contribution are welcome, we are just getting started!
+Create a simple pub/sub
+
+```js
+import shippr from "@shippr/client";
+
+//pub
+const client = shippr("APPID", "APIKEY");
+client.publish("my-shared-channel", { data: "something happened" });
+
+//sub
+const myWatcher = client.subscribe("my-shared-channel");
+myWatcher.on((data, err) => {
+  doSomethingFun();
+});
+```
+
+## Documentation
+
+Full documentation (generated via [Mintlify](https://mintlify.com/))
