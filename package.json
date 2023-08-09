@@ -1,0 +1,37 @@
+{
+  "name": "@shippr/client",
+  "version": "0.1.1",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/react/index.d.ts",
+  "files": [
+    "/lib"
+  ],
+  "devDependencies": {
+    "@babel/preset-env": "^7.22.9",
+    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-typescript": "^7.22.5",
+    "@rollup/plugin-commonjs": "^25.0.3",
+    "@rollup/plugin-node-resolve": "^15.1.0",
+    "rollup": "^3.27.0",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-typescript2": "^0.35.0",
+    "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": "^18"
+  },
+  "peerDependencies": {},
+  "scripts": {
+    "prepack": "yarn build",
+    "build": "rollup -c --bundleConfigAsCjs",
+    "watch": "rollup -cw"
+  },
+  "dependencies": {
+    "@types/uuid": "^9.0.2",
+    "reconnecting-websocket": "^4.4.0",
+    "uuid": "^9.0.0",
+    "ws": "^8.13.0"
+  },
+  "readme": "ERROR: No README data found!"
+}
