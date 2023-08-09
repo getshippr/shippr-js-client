@@ -5,7 +5,7 @@ import typescript from "rollup-plugin-typescript2";
 import pkg from "./package.json" assert { type: "json" };
 
 export default {
-  input: "react/index.ts",
+  input: "client/index.ts",
   output: [
     {
       file: "./lib/cjs/index.js",
