@@ -40,11 +40,10 @@ const init = (appId: string, apiKey: string) => {
           socket.addEventListener("message", (event) => {
             if (event.data) {
               const json = JSON.parse(event.data);
-              debugger;
               if (json.type === "error") {
                 return cb("null", json.message);
               } else {
-                return cb(event.data ? JSON.parse(event.data) : "null", null);
+                return cb(json, null);
               }
             } else {
               return cb("null", null);
