@@ -23,7 +23,9 @@ const publish = async (
 
 const createSocket = (channelId: string, apiKey: string, appId: string) => {
   return new ReconnectingWebSocket(
-    `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`
+    `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`,
+    undefined,
+    { maxRetries: 5 }
   );
 };
 
@@ -36,10 +38,19 @@ const init = (appId: string, apiKey: string) => {
       return {
         on: (cb: DataCallBack) => {
           socket.addEventListener("message", (event) => {
-            cb(event.data ? JSON.parse(event.data) : "null", null);
+            if (event.data) {
+              const json = JSON.parse(event.data);
+              if (json.type === "error") {
+                return cb("null", json.message);
+              } else {
+                return cb(event.data ? JSON.parse(event.data) : "null", null);
+              }
+            } else {
+              return cb("null", null);
+            }
           });
-          socket.addEventListener("error", (error) => {
-            cb(null, error);
+          socket.addEventListener("error", (event) => {
+            return cb("null", "internal websocket error");
           });
         },
       };
