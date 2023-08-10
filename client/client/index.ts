@@ -23,9 +23,7 @@ const publish = async (
 
 const createSocket = (channelId: string, apiKey: string, appId: string) => {
   return new ReconnectingWebSocket(
-    `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`,
-    undefined,
-    { maxRetries: 5 }
+    `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`
   );
 };
 
