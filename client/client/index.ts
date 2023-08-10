@@ -21,18 +21,29 @@ const publish = async (
   );
 };
 
-const createSocket = (channelId: string, apiKey: string, appId: string) => {
-  return new ReconnectingWebSocket(
-    `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`
-  );
+const createSocket = (
+  channelId: string,
+  apiKey: string,
+  appId: string
+): Promise<ReconnectingWebSocket> => {
+  return new Promise((resolve) => {
+    const socket = new ReconnectingWebSocket(
+      `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`,
+      [],
+      { maxRetries: 10, minReconnectionDelay: 1 }
+    );
+    socket.addEventListener("open", (event) => {
+      return resolve(socket);
+    });
+  });
 };
 
 type DataCallBack = (data: any, err: any) => void;
 
 const init = (appId: string, apiKey: string) => {
   return {
-    subscribe: (channelId: string) => {
-      const socket = createSocket(channelId, apiKey, appId);
+    subscribe: async (channelId: string) => {
+      const socket = await createSocket(channelId, apiKey, appId);
       return {
         on: (cb: DataCallBack) => {
           socket.addEventListener("message", (event) => {
