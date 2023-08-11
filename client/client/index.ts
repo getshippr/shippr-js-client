@@ -7,6 +7,10 @@ const publish = async (
   channelId: string,
   data: any
 ) => {
+  console.log(
+    "publish to ",
+    `${pushHttp}/hooks/${channelId}?apiKey=${apiKey}&appId=${appId}`
+  );
   return fetch(
     `${pushHttp}/hooks/${channelId}?apiKey=${apiKey}&appId=${appId}`,
     {
