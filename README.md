@@ -32,7 +32,7 @@ const client = shippr("APPID", "APIKEY");
 client.publish("my-shared-channel", { data: "something happened" });
 
 //sub
-const myWatcher = client.subscribe("my-shared-channel");
+const myWatcher = await client.subscribe("my-shared-channel");
 myWatcher.on((data, err) => {
   doSomethingFun();
 });
