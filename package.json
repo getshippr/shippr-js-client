@@ -1,6 +1,6 @@
 {
   "name": "@shippr/client",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@types/uuid": "^9.0.2",
+    "@types/ws": "^8.5.5",
     "reconnecting-websocket": "^4.4.0",
     "uuid": "^9.0.0",
     "ws": "^8.13.0"

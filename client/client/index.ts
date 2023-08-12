@@ -1,5 +1,6 @@
 import { push, pushHttp, pushWs } from "./hosts";
 import ReconnectingWebSocket from "reconnecting-websocket";
+import WS from "ws";
 
 const publish = async (
   appId: string,
@@ -7,10 +8,6 @@ const publish = async (
   channelId: string,
   data: any
 ) => {
-  console.log(
-    "publish to ",
-    `${pushHttp}/hooks/${channelId}?apiKey=${apiKey}&appId=${appId}`
-  );
   return fetch(
     `${pushHttp}/hooks/${channelId}?apiKey=${apiKey}&appId=${appId}`,
     {
@@ -34,7 +31,7 @@ const createSocket = (
     const socket = new ReconnectingWebSocket(
       `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`,
       [],
-      { maxRetries: 10, minReconnectionDelay: 1 }
+      { maxRetries: 10, minReconnectionDelay: 1, WebSocket: WS }
     );
     socket.addEventListener("open", (event) => {
       return resolve(socket);
