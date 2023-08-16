@@ -1,4 +1,4 @@
-import { push, pushHttp, pushWs } from "./hosts";
+import { pushHttp, pushWs } from "./hosts";
 import ReconnectingWebSocket from "reconnecting-websocket";
 import WS from "ws";
 
@@ -26,22 +26,9 @@ const createSocket = (
   channelId: string,
   apiKey: string,
   appId: string
-): Promise<ReconnectingWebSocket> => {
+): Promise<any> => {
   return new Promise((resolve) => {
-    const wsOption: any = {};
-    debugger;
-    console.log("does window exist", typeof window === "undefined");
-    if (typeof window === "undefined") {
-      wsOption.WebSocket = WS;
-    }
-    const socket = new ReconnectingWebSocket(
-      `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`,
-      [],
-      { maxRetries: 10, minReconnectionDelay: 1, ...wsOption }
-    );
-    socket.addEventListener("open", (event) => {
-      return resolve(socket);
-    });
+    return resolve({});
   });
 };
 
@@ -53,7 +40,7 @@ const init = (appId: string, apiKey: string) => {
       const socket = await createSocket(channelId, apiKey, appId);
       return {
         on: (cb: DataCallBack) => {
-          socket.addEventListener("message", (event) => {
+          socket.addEventListener("message", (event: any) => {
             if (event.data) {
               const json = JSON.parse(event.data);
               if (json.type === "error") {
@@ -65,7 +52,7 @@ const init = (appId: string, apiKey: string) => {
               return cb("null", null);
             }
           });
-          socket.addEventListener("error", (event) => {
+          socket.addEventListener("error", (event: any) => {
             return cb("null", "internal websocket error");
           });
         },
