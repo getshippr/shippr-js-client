@@ -29,6 +29,8 @@ const createSocket = (
 ): Promise<ReconnectingWebSocket> => {
   return new Promise((resolve) => {
     const wsOption: any = {};
+    debugger;
+    console.log("does window exist", typeof window === "undefined");
     if (typeof window === "undefined") {
       wsOption.WebSocket = WS;
     }
