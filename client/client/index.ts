@@ -28,10 +28,14 @@ const createSocket = (
   appId: string
 ): Promise<ReconnectingWebSocket> => {
   return new Promise((resolve) => {
+    const wsOption: any = {};
+    if (typeof window === "undefined") {
+      wsOption.WebSocket = WS;
+    }
     const socket = new ReconnectingWebSocket(
       `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`,
       [],
-      { maxRetries: 10, minReconnectionDelay: 1, WebSocket: WS }
+      { maxRetries: 10, minReconnectionDelay: 1, ...wsOption }
     );
     socket.addEventListener("open", (event) => {
       return resolve(socket);
