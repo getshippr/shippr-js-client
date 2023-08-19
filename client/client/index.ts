@@ -1,6 +1,6 @@
+import { SuperSocketOptions } from "@shippr/supersocket/lib/esm/types/supersocket";
 import { pushHttp, pushWs } from "./hosts";
-import ReconnectingWebSocket from "reconnecting-websocket";
-import WS from "ws";
+import SuperSocket from "@shippr/supersocket";
 
 const publish = async (
   appId: string,
@@ -25,36 +25,43 @@ const publish = async (
 const createSocket = (
   channelId: string,
   apiKey: string,
-  appId: string
-): Promise<any> => {
+  appId: string,
+  options?: SuperSocketOptions
+): Promise<SuperSocket> => {
   return new Promise((resolve) => {
-    return resolve({});
+    const socket = new SuperSocket(
+      `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`,
+      [],
+      options
+    );
+    socket.onmessage = (event) => {
+      return resolve(socket);
+    };
   });
 };
 
 type DataCallBack = (data: any, err: any) => void;
 
-const init = (appId: string, apiKey: string) => {
+const init = (appId: string, apiKey: string, options?: SuperSocketOptions) => {
   return {
     subscribe: async (channelId: string) => {
-      const socket = await createSocket(channelId, apiKey, appId);
+      const socket = await createSocket(channelId, apiKey, appId, options);
       return {
         on: (cb: DataCallBack) => {
-          socket.addEventListener("message", (event: any) => {
-            if (event.data) {
-              const json = JSON.parse(event.data);
-              if (json.type === "error") {
-                return cb("null", json.message);
-              } else {
-                return cb(json, null);
-              }
+          socket.onmessage = (event) => {
+            const data = event.data ? JSON.parse(`${event.data}`) : null;
+            if (data.type === "error") {
+              return cb(null, data.message);
             } else {
-              return cb("null", null);
+              return cb(data, null);
             }
-          });
-          socket.addEventListener("error", (event: any) => {
-            return cb("null", "internal websocket error");
-          });
+          };
+          socket.onerror = (event) => {
+            cb(null, event.message);
+          };
+        },
+        getSocket: (): SuperSocket => {
+          return socket;
         },
       };
     },
@@ -63,5 +70,4 @@ const init = (appId: string, apiKey: string) => {
     },
   };
 };
-
 export { init };
