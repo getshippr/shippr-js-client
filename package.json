@@ -1,9 +1,16 @@
 {
   "name": "@shippr/client",
-  "version": "0.2.0",
+  "version": "0.3.0",
+  "author": "baptiste@getshippr.com",
+  "description": "Shippr's JS Client ",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
   "types": "./lib/esm/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/getshippr/supersocket"
+  },
+  "license": "SEE LICENSE IN LICENSE FILE IN GIT REPOSITORY",
   "files": [
     "/lib"
   ],
