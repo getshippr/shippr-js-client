@@ -22,18 +22,9 @@ const publish = async (
   );
 };
 
-const createSocket = (
-  channelId: string,
-  apiKey: string,
-  appId: string,
-  options?: SuperSocketOptions
-): Promise<SuperSocket> => {
+const createSocket = (options?: SuperSocketOptions): Promise<SuperSocket> => {
   return new Promise((resolve) => {
-    const socket = new SuperSocket(
-      `${pushWs}?apiKey=${apiKey}&appId=${appId}&channelId=${channelId}`,
-      [],
-      options
-    );
+    const socket = new SuperSocket(pushWs, [], options);
     socket.onmessage = (event) => {
       return resolve(socket);
     };
@@ -42,10 +33,22 @@ const createSocket = (
 
 type DataCallBack = (data: any, err: any) => void;
 
-const init = (appId: string, apiKey: string, options?: SuperSocketOptions) => {
+const init = (
+  appId: string,
+  apiKey: string,
+  options?: { wsOptions?: SuperSocketOptions; userId?: string }
+) => {
   return {
-    subscribe: async (channelId: string) => {
-      const socket = await createSocket(channelId, apiKey, appId, options);
+    subscribe: async (channelId: string, meId?: any) => {
+      const queryParams: any = { channelId, apiKey, appId };
+      if (meId) {
+        queryParams.userId = meId;
+      }
+      const socket = await createSocket(
+        Object.assign(options?.wsOptions || {}, {
+          queryParams,
+        })
+      );
       return {
         on: (cb: DataCallBack) => {
           socket.onmessage = (event) => {
