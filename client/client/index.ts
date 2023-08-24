@@ -25,7 +25,7 @@ const publish = async (
 const createSocket = (options?: SuperSocketOptions): Promise<SuperSocket> => {
   return new Promise((resolve) => {
     const socket = new SuperSocket(pushWs, [], options);
-    socket.onmessage = (event) => {
+    socket.onopen = (event) => {
       return resolve(socket);
     };
   });
@@ -39,10 +39,10 @@ const init = (
   options?: { wsOptions?: SuperSocketOptions; userId?: string }
 ) => {
   return {
-    subscribe: async (channelId: string, meId?: any) => {
+    subscribe: async (channelId: string) => {
       const queryParams: any = { channelId, apiKey, appId };
-      if (meId) {
-        queryParams.userId = meId;
+      if (options?.userId) {
+        queryParams.userId = options?.userId;
       }
       const socket = await createSocket(
         Object.assign(options?.wsOptions || {}, {
