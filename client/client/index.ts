@@ -66,6 +66,11 @@ const init = (
         getSocket: (): SuperSocket => {
           return socket;
         },
+        disconnect: (): void => {
+          if (socket.close) {
+            return socket.close();
+          }
+        },
       };
     },
     publish: (channelId: string, data: any) => {
