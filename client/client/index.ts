@@ -1,6 +1,7 @@
 import { SuperSocketOptions } from "@shippr/supersocket/lib/esm/types/supersocket";
 import { pushHttp, pushWs } from "./hosts";
 import SuperSocket from "@shippr/supersocket";
+import { DataCallBack, ShipprClient, ShipprSub } from "../types";
 
 const publish = async (
   appId: string,
@@ -30,18 +31,6 @@ const createSocket = (options?: SuperSocketOptions): Promise<SuperSocket> => {
     };
   });
 };
-
-export type DataCallBack = (data: any, err: any) => void;
-export type ShipprClient = {
-  subscribe: (channelId: string) => Promise<ShipprSub>;
-  publish: (channelId: string, data: any) => Promise<Response>;
-};
-export type ShipprSub = {
-  on: (cb: DataCallBack) => void;
-  getSocket: () => SuperSocket;
-  disconnect: () => void;
-};
-
 const init = (
   appId: string,
   apiKey: string,
