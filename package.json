@@ -1,6 +1,6 @@
 {
   "name": "@shippr/client",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "author": "baptiste@getshippr.com",
   "description": "Shippr's JS Client ",
   "main": "./lib/cjs/index.js",

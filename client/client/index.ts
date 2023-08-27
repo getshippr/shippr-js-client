@@ -31,13 +31,12 @@ const createSocket = (options?: SuperSocketOptions): Promise<SuperSocket> => {
   });
 };
 
-type DataCallBack = (data: any, err: any) => void;
-type ShipprClient = {
+export type DataCallBack = (data: any, err: any) => void;
+export type ShipprClient = {
   subscribe: (channelId: string) => Promise<ShipprSub>;
   publish: (channelId: string, data: any) => Promise<Response>;
 };
-
-type ShipprSub = {
+export type ShipprSub = {
   on: (cb: DataCallBack) => void;
   getSocket: () => SuperSocket;
   disconnect: () => void;
