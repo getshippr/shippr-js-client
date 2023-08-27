@@ -40,6 +40,11 @@ type ShipprClient = {
   }>;
   publish: (channelId: string, data: any) => Promise<Response>;
 };
+type ShipprSub = {
+  on: (cb: DataCallBack) => void;
+  getSocket: () => SuperSocket;
+  disconnect: () => void;
+};
 
 const init = (
   appId: string,
@@ -47,7 +52,7 @@ const init = (
   options?: { wsOptions?: SuperSocketOptions; userId?: string }
 ): ShipprClient => {
   return {
-    subscribe: async (channelId: string) => {
+    subscribe: async (channelId: string): Promise<ShipprSub> => {
       const queryParams: any = { channelId, apiKey, appId };
       if (options?.userId) {
         queryParams.userId = options?.userId;

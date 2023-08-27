@@ -1,6 +1,6 @@
 {
   "name": "@shippr/client",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "author": "baptiste@getshippr.com",
   "description": "Shippr's JS Client ",
   "main": "./lib/cjs/index.js",
@@ -34,7 +34,6 @@
   },
   "dependencies": {
     "@babel/core": "^7.22.11",
-    "@shippr/client": "^0.1.18",
     "@shippr/supersocket": "^1.0.5"
   },
   "packageManager": "yarn@3.6.1"
