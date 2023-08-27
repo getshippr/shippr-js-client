@@ -1909,16 +1909,16 @@ __metadata:
     "@babel/preset-typescript": ^7.22.5
     "@rollup/plugin-commonjs": ^25.0.3
     "@rollup/plugin-node-resolve": ^15.1.0
-    "@shippr/supersocket": ^1.0.5
+    "@shippr/supersocket": ^1.0.6
     rollup: ^3.27.0
     rollup-plugin-typescript2: ^0.35.0
     typescript: ^5.1.6
   languageName: unknown
   linkType: soft
 
-"@shippr/supersocket@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "@shippr/supersocket@npm:1.0.5"
+"@shippr/supersocket@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "@shippr/supersocket@npm:1.0.6"
   dependencies:
     "@jest/globals": ^29.6.2
     "@types/crypto-js": ^4.1.1
@@ -1930,7 +1930,7 @@ __metadata:
     mock-socket: ^9.2.1
     ts-jest: ^29.1.1
     ws: ^8.13.0
-  checksum: c9dcf26baf951f4b6c4b2e3b9d383945e47a23274e165a76b1383bdaf0efb01dcae568c122b969073b173236821f708d258620b54fae4c9933d741fc70370160
+  checksum: 29c410bc52e3a559130bfb599548727c0c9e3b79b1a3eac24b8aebe03fb151d7521d2d6a087c8ca2fab83e26ae7d5557545b7937e6456389a9d51e57510a2678
   languageName: node
   linkType: hard
 
