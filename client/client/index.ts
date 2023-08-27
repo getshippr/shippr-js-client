@@ -32,12 +32,20 @@ const createSocket = (options?: SuperSocketOptions): Promise<SuperSocket> => {
 };
 
 type DataCallBack = (data: any, err: any) => void;
+type ShipprClient = {
+  subscribe: (channelId: string) => Promise<{
+    on: (cb: DataCallBack) => void;
+    getSocket: () => SuperSocket;
+    disconnect: () => void;
+  }>;
+  publish: (channelId: string, data: any) => Promise<Response>;
+};
 
 const init = (
   appId: string,
   apiKey: string,
   options?: { wsOptions?: SuperSocketOptions; userId?: string }
-) => {
+): ShipprClient => {
   return {
     subscribe: async (channelId: string) => {
       const queryParams: any = { channelId, apiKey, appId };

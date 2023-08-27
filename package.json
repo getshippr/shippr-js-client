@@ -1,6 +1,6 @@
 {
   "name": "@shippr/client",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "author": "baptiste@getshippr.com",
   "description": "Shippr's JS Client ",
   "main": "./lib/cjs/index.js",
@@ -8,7 +8,7 @@
   "types": "./lib/esm/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/getshippr/supersocket"
+    "url": "https://github.com/getshippr/shippr-js-client"
   },
   "license": "SEE LICENSE IN LICENSE FILE IN GIT REPOSITORY",
   "files": [
@@ -21,7 +21,6 @@
     "@rollup/plugin-commonjs": "^25.0.3",
     "@rollup/plugin-node-resolve": "^15.1.0",
     "rollup": "^3.27.0",
-    "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.35.0",
     "typescript": "^5.1.6"
   },
@@ -34,13 +33,9 @@
     "watch": "rollup -cw"
   },
   "dependencies": {
+    "@babel/core": "^7.22.11",
     "@shippr/client": "^0.1.18",
-    "@shippr/supersocket": "^1.0.2",
-    "@types/uuid": "^9.0.2",
-    "@types/ws": "^8.5.5",
-    "uuid": "^9.0.0",
-    "ws": "^8.13.0"
+    "@shippr/supersocket": "^1.0.5"
   },
-  "readme": "ERROR: No README data found!",
   "packageManager": "yarn@3.6.1"
 }
