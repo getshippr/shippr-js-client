@@ -71,11 +71,11 @@ const init = (
         },
         emit: (data: any) => {
           const wsData = data || {};
-          return socket.send({ emit: "single", ...wsData });
+          return socket.send({ emit: "single", data: { ...wsData } });
         },
         broadcast: (data: any) => {
           const wsData = data || {};
-          return socket.send({ emit: "broadcast", ...wsData });
+          return socket.send({ emit: "broadcast", data: { ...wsData } });
         },
       };
     },
