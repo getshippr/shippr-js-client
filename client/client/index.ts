@@ -69,6 +69,14 @@ const init = (
             return socket.close();
           }
         },
+        emit: (data: any) => {
+          const wsData = data || {};
+          return socket.send({ emit: "single", ...wsData });
+        },
+        broadcast: (data: any) => {
+          const wsData = data || {};
+          return socket.send({ emit: "broadcast", ...wsData });
+        },
       };
     },
     publish: (channelId: string, data: any) => {
